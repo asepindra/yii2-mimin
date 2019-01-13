@@ -199,5 +199,20 @@ Class Mimin extends \yii\base\Object
 		}
 		return trim($template);
 	}
+	
+	public static function can($permission)
+	{
+		$user = Yii::$app->user;
+		if(is_array($permission))
+		{
+			foreach ($permission as $p) {
+				if($user->can($p))
+					return true;
+			}
+			return false; 
+		}
+		else
+			return $user->can($permission);
+	}	
 
 }
